@@ -8,7 +8,8 @@
     "next": "14.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "viem": "^2.9.27"
   },
   "devDependencies": {
     "@nx/cypress": "18.3.4",
@@ -17,8 +18,8 @@
     "@nx/jest": "18.3.4",
     "@nx/js": "18.3.4",
     "@nx/next": "18.3.4",
-    "@nx/workspace": "18.3.4",
     "@nx/react": "18.3.4",
+    "@nx/workspace": "18.3.4",
     "@swc-node/register": "~1.8.0",
     "@swc/core": "~1.3.85",
     "@swc/helpers": "~0.5.2",

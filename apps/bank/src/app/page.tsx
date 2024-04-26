@@ -1,8 +1,22 @@
 'use client';
 
+import { createWalletClient, custom } from 'viem';
+import { sepolia } from 'viem/chains';
+
 export default function Index() {
   function onConnect() {
-    console.log('connect');
+    async function processAsync() {
+      const client = createWalletClient({
+        chain: sepolia,
+        transport: custom(window.ethereum!),
+      });
+
+      const [address] = await client.requestAddresses();
+
+      console.log(address);
+    }
+
+    processAsync();
   }
 
   function onDeposit(event: React.FormEvent<HTMLFormElement>) {
