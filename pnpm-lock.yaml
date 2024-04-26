@@ -7,6 +7,7 @@ specifiers:
   '@nx/jest': 18.3.4
   '@nx/js': 18.3.4
   '@nx/next': 18.3.4
+  '@nx/react': 18.3.4
   '@nx/workspace': 18.3.4
   '@swc-node/register': ~1.8.0
   '@swc/core': ~1.3.85
@@ -55,6 +56,7 @@ devDependencies:
   '@nx/jest': 18.3.4_5rhxggfqlncxytoeeaxdrwhtyi
   '@nx/js': 18.3.4_ueop6vopzhsguj6la5djjbv53e
   '@nx/next': 18.3.4_6gwlks5mcyaza3gagpqdkol6bq
+  '@nx/react': 18.3.4_4fnz5fnlejhttb7pxrevqs73um
   '@nx/workspace': 18.3.4_vgmcndajlfcqcjkmoixnlwjy2a
   '@swc-node/register': 1.8.0_d62pnosd2xspdzgaphp5vqwtua
   '@swc/core': 1.3.107_@swc+helpers@0.5.5
