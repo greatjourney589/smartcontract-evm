@@ -1,13 +1,8 @@
-import styles from './page.module.css';
+import './nx.css';
 
-export default function Index() {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.css file.
-   */
+export default function NxHelp() {
   return (
-    <div className={styles.page}>
+    <div>
       <div className="wrapper">
         <div className="container">
           <div id="welcome">
