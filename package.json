@@ -1,5 +1,5 @@
 {
-  "name": "@evm-smart-contract-example/source",
+  "name": "@app/source",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -47,6 +47,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "jest": "^29.4.1",
     "jest-environment-jsdom": "^29.4.1",
+    "jest-environment-node": "^29.4.1",
     "nx": "18.3.4",
     "postcss": "8.4.21",
     "prettier": "^2.6.2",
