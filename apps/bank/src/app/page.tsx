@@ -1,72 +1,84 @@
 'use client';
 
 import { createWalletClient, createPublicClient, custom, http } from 'viem';
-import { getContract } from 'viem';
 import { sepolia } from 'viem/chains';
 
-const abi = [
-  {
-    inputs: [{ internalType: 'address', name: '_token', type: 'address' }],
-    stateMutability: 'nonpayable',
-    type: 'constructor',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: 'address', name: 'user', type: 'address' },
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-    ],
-    name: 'Deposit',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: 'address', name: 'user', type: 'address' },
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-    ],
-    name: 'Withdrawal',
-    type: 'event',
-  },
-  {
-    inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
-    name: 'deposit',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [{ internalType: 'address', name: 'user', type: 'address' }],
-    name: 'getBalance',
-    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'token',
-    outputs: [{ internalType: 'contract IERC20', name: '', type: 'address' }],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
-    name: 'withdraw',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-] as const;
+const bankContract = {
+  address: '0x37C3E0343b0c5E23913eB3f4c346FAF336bf6408' as `0x${string}`,
+  abi: [
+    {
+      inputs: [{ internalType: 'address', name: '_token', type: 'address' }],
+      stateMutability: 'nonpayable',
+      type: 'constructor',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          internalType: 'address',
+          name: 'user',
+          type: 'address',
+        },
+        {
+          indexed: false,
+          internalType: 'uint256',
+          name: 'amount',
+          type: 'uint256',
+        },
+      ],
+      name: 'Deposit',
+      type: 'event',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          internalType: 'address',
+          name: 'user',
+          type: 'address',
+        },
+        {
+          indexed: false,
+          internalType: 'uint256',
+          name: 'amount',
+          type: 'uint256',
+        },
+      ],
+      name: 'Withdrawal',
+      type: 'event',
+    },
+    {
+      inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
+      name: 'deposit',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
+      inputs: [{ internalType: 'address', name: 'user', type: 'address' }],
+      name: 'getBalance',
+      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'token',
+      outputs: [{ internalType: 'contract IERC20', name: '', type: 'address' }],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
+      name: 'withdraw',
+      outputs: [],
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+  ] as const,
+};
 
 export default function Index() {
   function onConnect() {
@@ -84,17 +96,25 @@ export default function Index() {
       const [address] = await client.requestAddresses();
       console.log({ address });
 
-      const contract = getContract({
-        address: '0x37C3E0343b0c5E23913eB3f4c346FAF336bf6408',
-        abi,
-        client: {
-          public: publicClient,
-          wallet: client,
-        },
+      const balance = await publicClient.readContract({
+        ...bankContract,
+        functionName: 'getBalance',
+        args: [address],
       });
 
-      const balance = await contract.read.getBalance([address]);
       console.log({ balance });
+
+      const { request } = await publicClient.simulateContract({
+        ...bankContract,
+        account: address,
+        functionName: 'deposit',
+        args: [BigInt(10)],
+      });
+      const hash = await client.writeContract(request);
+      console.log({ hash });
+
+      const receipt = await publicClient.waitForTransactionReceipt({ hash });
+      console.log({ receipt });
     }
 
     processAsync();
