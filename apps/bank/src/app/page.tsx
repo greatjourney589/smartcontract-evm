@@ -1,19 +1,100 @@
 'use client';
 
-import { createWalletClient, custom } from 'viem';
+import { createWalletClient, createPublicClient, custom, http } from 'viem';
+import { getContract } from 'viem';
 import { sepolia } from 'viem/chains';
+
+const abi = [
+  {
+    inputs: [{ internalType: 'address', name: '_token', type: 'address' }],
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: 'address', name: 'user', type: 'address' },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'Deposit',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: 'address', name: 'user', type: 'address' },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'amount',
+        type: 'uint256',
+      },
+    ],
+    name: 'Withdrawal',
+    type: 'event',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
+    name: 'deposit',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'address', name: 'user', type: 'address' }],
+    name: 'getBalance',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'token',
+    outputs: [{ internalType: 'contract IERC20', name: '', type: 'address' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
+    name: 'withdraw',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+] as const;
 
 export default function Index() {
   function onConnect() {
     async function processAsync() {
+      const publicClient = createPublicClient({
+        chain: sepolia,
+        transport: http(),
+      });
+
       const client = createWalletClient({
         chain: sepolia,
         transport: custom(window.ethereum!),
       });
 
       const [address] = await client.requestAddresses();
+      console.log({ address });
 
-      console.log(address);
+      const contract = getContract({
+        address: '0x37C3E0343b0c5E23913eB3f4c346FAF336bf6408',
+        abi,
+        client: {
+          public: publicClient,
+          wallet: client,
+        },
+      });
+
+      const balance = await contract.read.getBalance([address]);
+      console.log({ balance });
     }
 
     processAsync();
