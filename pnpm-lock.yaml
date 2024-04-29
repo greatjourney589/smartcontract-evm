@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@chakra-ui/icons': ^2.1.1
   '@chakra-ui/next-js': ^2.2.0
   '@chakra-ui/react': ^2.8.2
   '@emotion/react': ^11.11.4
@@ -16,6 +17,7 @@ specifiers:
   '@swc-node/register': ~1.8.0
   '@swc/core': ~1.3.85
   '@swc/helpers': ~0.5.2
+  '@tanstack/react-query': ^5.32.0
   '@testing-library/react': ^15.0.5
   '@types/jest': ^29.4.0
   '@types/node': 18.16.9
@@ -52,10 +54,12 @@ specifiers:
   viem: ^2.9.27
 
 dependencies:
+  '@chakra-ui/icons': 2.1.1_woytwhjtixdosusngyfk7vvafu
   '@chakra-ui/next-js': 2.2.0_hzjkw4j6jhlpztixbwpj4cu5ty
   '@chakra-ui/react': 2.8.2_6lg4lgzq2cyafvzj4bmhmunfda
   '@emotion/react': 11.11.4_o5ysialsahsznabqayk7pree4e
   '@emotion/styled': 11.11.5_dpcllsehk6bx7tasbh7pjyjkiy
+  '@tanstack/react-query': 5.32.0_react@18.2.0
   framer-motion: 11.1.7_biqbaboplfbrettd7655fr4n2y
   next: 14.0.4_4hfdybydx6yl56jleczrbuxrmi
   react: 18.2.0
@@ -1710,6 +1714,17 @@ packages:
       react: '>=18'
     dependencies:
       '@chakra-ui/shared-utils': 2.0.5
+      '@chakra-ui/system': 2.6.2_ilot62uxe3kggweyvbmzeinfca
+      react: 18.2.0
+    dev: false
+
+  /@chakra-ui/icons/2.1.1_woytwhjtixdosusngyfk7vvafu:
+    resolution: {integrity: sha512-3p30hdo4LlRZTT5CwoAJq3G9fHI0wDc0pBaMHj4SUn0yomO+RcDRlzhdXqdr5cVnzax44sqXJVnf3oQG0eI+4g==}
+    peerDependencies:
+      '@chakra-ui/system': '>=2.0.0'
+      react: '>=18'
+    dependencies:
+      '@chakra-ui/icon': 3.2.0_woytwhjtixdosusngyfk7vvafu
       '@chakra-ui/system': 2.6.2_ilot62uxe3kggweyvbmzeinfca
       react: 18.2.0
     dev: false
@@ -4245,6 +4260,19 @@ packages:
     dependencies:
       '@swc/counter': 0.1.3
     dev: true
+
+  /@tanstack/query-core/5.32.0:
+    resolution: {integrity: sha512-Z3flEgCat55DRXU5UMwYU1U+DgFZKA3iufyOKs+II7iRAo0uXkeU7PH5e6sOH1CGEag0IpKmZxlUFpCg6roSKw==}
+    dev: false
+
+  /@tanstack/react-query/5.32.0_react@18.2.0:
+    resolution: {integrity: sha512-+E3UudQtarnx9A6xhpgMZapyF+aJfNBGFMgI459FnduEZqT/9KhOWnMOneZahLRt52yzskSA0AuOyLkXHK0yBA==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-core': 5.32.0
+      react: 18.2.0
+    dev: false
 
   /@testing-library/dom/10.0.0:
     resolution: {integrity: sha512-PmJPnogldqoVFf+EwbHvbBJ98MmqASV8kLrBYgsDNxQcFMeIS7JFL48sfyXvuMtgmWO/wMhh25odr+8VhDmn4g==}

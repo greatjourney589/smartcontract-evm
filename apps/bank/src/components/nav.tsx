@@ -1,14 +1,18 @@
+'use client';
+
 import { stringShorten } from '@app/utils';
 import { Bank } from '../icons/bank';
 import { MetaMask } from '../icons/metamask';
 
+import { useWallet } from '../store/useWallet';
+
 type Props = {
   appName: string;
-  onConnect?: () => void;
-  address?: string | null | undefined;
 };
 
-export function Nav({ appName, address, onConnect }: Props) {
+export function Nav({ appName }: Props) {
+  const { refetch: connect, data, isFetching } = useWallet();
+
   return (
     <nav className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -22,23 +26,24 @@ export function Nav({ appName, address, onConnect }: Props) {
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
               <div className="relative ml-3">
-                {address == null ? (
+                {data == null ? (
                   <button
                     type="button"
-                    onClick={onConnect}
+                    onClick={() => connect()}
+                    disabled={isFetching}
                     className="bg-gray-900 flex items-center text-white rounded-md px-3 py-2 text-sm font-medium"
                   >
                     <span className="mr-2">
                       <MetaMask width={20} />
                     </span>
-                    Connect wallet
+                    {isFetching ? 'Connecting...' : 'Connect wallet'}
                   </button>
                 ) : (
                   <div className="flex items-center bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium">
                     <span className="mr-2">
                       <MetaMask width={20} />
                     </span>
-                    {stringShorten(address)}
+                    {stringShorten(data?.address || '0x')}
                   </div>
                 )}
               </div>
