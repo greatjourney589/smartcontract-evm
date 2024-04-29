@@ -1,6 +1,6 @@
 # evm-smart-contract-example
 
-<p align="center"><img src="https://raw.githubusercontent.com/jonalvarezz/evm-smart-contract-example/main/assets/screenshot.png" width="500"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/jonalvarezz/evm-smart-contract-example/main/assets/screenshot.png?token=GHSAT0AAAAAABUAWENUMNSMA6WBPA7YTTW2ZRP4BYQ" width="500"></p>
 
 This is a web application to interact with the two following smart contracts on the Sepolia (ETH) network:
 
