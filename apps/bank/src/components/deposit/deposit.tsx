@@ -8,6 +8,7 @@ import { useWallet } from '../../store/useWallet';
 import { DepositForm as Form } from './deposit-form';
 import { TransactionReceipt } from 'viem';
 import { useBankBalance } from '../../store/useBankBalance';
+import { useTokenQuery } from '../../store/useToken';
 
 type TransactionStatus =
   | {
@@ -29,6 +30,8 @@ type TransactionStatus =
 export function Deposit() {
   const { data, status } = useWallet();
   const { refetch: refetchBankBalance } = useBankBalance();
+  const { data: tokenData } = useTokenQuery();
+
   const [txStatus, setTxStatus] = useState<TransactionStatus>({
     status: 'pending',
   });
@@ -61,6 +64,7 @@ export function Deposit() {
     <div>
       <Form
         onDeposit={onDeposit}
+        tokenData={tokenData}
         isLoading={
           txStatus.status === 'writing' || txStatus.status === 'executed'
         }
