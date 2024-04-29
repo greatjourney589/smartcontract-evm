@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@app/contract": ["packages/contract/src/index.ts"]
+      "@app/contract": ["packages/contract/src/index.ts"],
+      "@app/utils": ["packages/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

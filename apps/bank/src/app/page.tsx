@@ -5,8 +5,32 @@ import { sepolia } from 'viem/chains';
 
 import { bank } from '@app/contract';
 
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Heading,
+  Text,
+  HStack,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  FormControl,
+  FormLabel,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Button,
+} from '@chakra-ui/react';
+
 export default function Index() {
-  function onConnect() {
+  function onConnect(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
     async function processAsync() {
       const publicClient = createPublicClient({
         chain: sepolia,
@@ -51,69 +75,52 @@ export default function Index() {
   }
 
   return (
-    <div>
-      <aside className="p-4 border rounded my-4">
-        <h2>Account</h2>
-        <dl>
-          <dt className="inline font-semibold text-gray-900">Address</dt>
-          <dd>0x1234567890abcdef</dd>
-          <dt className="inline font-semibold text-gray-900">Chain</dt>
-          <dd>ETH</dd>
-          <dt className="inline font-semibold text-gray-900">Balance</dt>
-          <dd>1000</dd>
-        </dl>
-        <div className="my-2">
-          <button
-            onClick={onConnect}
-            className="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Connect
-          </button>
-        </div>
-      </aside>
-      <section className="p-4 border rounded my-4">
-        <h2>Bank</h2>
-        <dl>
-          <dt className="inline font-semibold text-gray-900">Balance</dt>
-          <dd>1000</dd>
-        </dl>
-        <form onSubmit={onDeposit}>
-          <div className="my-2">
-            <div className="flex items-center">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Amount
-              </label>
-              <div className="text-sm ml-4">
-                <a
-                  href="#"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
-                >
-                  ?
-                </a>
-              </div>
-            </div>
-            <div className="mt-2">
-              <input
-                name="amount"
-                type="number"
-                required
-                className="rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
-          <div className="my-2">
-            <button
-              type="submit"
-              className="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Deposit
-            </button>
-          </div>
-        </form>
-      </section>
+    <div className="flex items-center justify-center">
+      <Card className="w-11/12 max-w-2xl mt-10" variant="elevated" size="md">
+        <CardHeader>
+          <HStack as="h2" justifyContent="space-between">
+            <Heading as="div" size="lg">
+              Your Balance
+            </Heading>
+            <Heading as="div" size="lg">
+              <span className="text-emerald-600">1000</span> <span>TTK</span>
+            </Heading>
+          </HStack>
+        </CardHeader>
+        <CardBody>
+          <Text>Manage your account with Bank3 App.</Text>
+          <Tabs className="mt-8">
+            <TabList>
+              <Tab>Deposit</Tab>
+            </TabList>
+
+            <TabPanels>
+              <TabPanel>
+                <form onSubmit={onConnect}>
+                  <FormControl>
+                    <FormLabel>Amount</FormLabel>
+                    <NumberInput max={50} min={10}>
+                      <NumberInputField />
+                      <NumberInputStepper>
+                        <NumberIncrementStepper />
+                        <NumberDecrementStepper />
+                      </NumberInputStepper>
+                    </NumberInput>
+                  </FormControl>
+                  <Button
+                    mt={4}
+                    colorScheme="teal"
+                    isLoading={false}
+                    type="submit"
+                  >
+                    Deposit
+                  </Button>
+                </form>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </CardBody>
+      </Card>
     </div>
   );
 }
