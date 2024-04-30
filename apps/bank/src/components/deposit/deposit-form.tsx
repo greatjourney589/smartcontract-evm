@@ -1,6 +1,8 @@
 'use client';
 
 import {
+  Alert,
+  AlertIcon,
   FormControl,
   FormLabel,
   NumberInput,
@@ -10,6 +12,8 @@ import {
   NumberDecrementStepper,
   Button,
   HStack,
+  Center,
+  Spinner,
   Text,
   Link,
   useToast,
@@ -53,15 +57,37 @@ export function DepositForm({
     }
   };
 
+  if (!tokenData) {
+    return (
+      <Center h="150px">
+        <Spinner color="grey" />
+      </Center>
+    );
+  }
+
+  const allowance = tokenData.allowance.toString();
+
+  const isFormDisabled = isLoading || allowance === '0';
+
   return (
     <form onSubmit={onSubmit}>
-      <FormControl isDisabled={isLoading}>
+      {allowance === '0' && (
+        <Alert status="warning" my={4}>
+          <AlertIcon />
+          It seems your account has no allowance.
+          <Link
+            href="https://sepolia.etherscan.io/address/0x9aF18838611950953823154a04a14d2A34eE615e#writeContract#F1"
+            isExternal
+            color="teal.500"
+          >
+            <ExternalLinkIcon mx="2px" />
+            Increase your allowance
+          </Link>
+        </Alert>
+      )}
+      <FormControl isDisabled={isFormDisabled}>
         <FormLabel>Amount</FormLabel>
-        <NumberInput
-          max={parseInt(tokenData?.allowance.toString() ?? '100000', 10)}
-          min={1}
-          name="amount"
-        >
+        <NumberInput max={parseInt(allowance, 10)} min={1} name="amount">
           <NumberInputField />
           <NumberInputStepper>
             <NumberIncrementStepper />
@@ -70,7 +96,7 @@ export function DepositForm({
         </NumberInput>
       </FormControl>
       <HStack spacing={4} fontSize="sm">
-        <Text>Allowance: {tokenData?.allowance?.toString()} TTK</Text>
+        <Text>Allowance: {allowance} TTK</Text>
         <Link
           href="https://sepolia.etherscan.io/address/0x9aF18838611950953823154a04a14d2A34eE615e#writeContract#F1"
           isExternal
@@ -81,7 +107,12 @@ export function DepositForm({
         </Link>
       </HStack>
 
-      <Button isDisabled={isLoading} mt={4} colorScheme="teal" type="submit">
+      <Button
+        isDisabled={isFormDisabled}
+        mt={4}
+        colorScheme="teal"
+        type="submit"
+      >
         Deposit
       </Button>
     </form>
