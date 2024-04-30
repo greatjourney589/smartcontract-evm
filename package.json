@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nx run bank:dev",
-    "build": "nx run bank:build",
+    "build": "nx run bank:build:production",
     "start": "nx run bank:start",
     "test": "nx affected --target=test --plain -- --passWithNoTests",
     "lint": "nx affected --target=lint --plain"

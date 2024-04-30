@@ -30,7 +30,7 @@ type TransactionStatus =
 export function Deposit() {
   const { data, status } = useWallet();
   const { refetch: refetchBankBalance } = useBankBalance();
-  const { data: tokenData } = useTokenQuery();
+  const { data: tokenData, refetch: refetchTokenData } = useTokenQuery();
 
   const [txStatus, setTxStatus] = useState<TransactionStatus>({
     status: 'pending',
@@ -57,7 +57,10 @@ export function Deposit() {
     const receipt = await publicClient.waitForTransactionReceipt({ hash });
 
     setTxStatus({ status: 'receipt', hash, receipt });
+
+    // manually invalidate cache
     refetchBankBalance();
+    refetchTokenData();
   };
 
   return (
