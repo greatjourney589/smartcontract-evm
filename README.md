@@ -55,6 +55,11 @@ It will show tasks that you can run with Nx.
 
 - Gain familiarity interacting with EVM Smart Contract from a web app.
 
+### Technical highlights
+
+- Use Viem directly instead of Wagmi. Wagmi is a React Query wrapped of Viem to provide React Hooks for all of Viem's features. As a consequence, one ends up relying on `useEffect` to tell when something changed from Wagmi hooks. I decided to use Viem to one, keep it simple. And two, further understand Wagmi's decisions when wrapping Viem.
+- React Query. For the app's state management, async operations and HTTP/WS's cache. It's worth nothing that some data is preloaded, as for instance, the Token's name, and symbol, not to block the rendering with data that doesn't change often. Data is revalidated in the background after the first mount.
+
 ### TODO
 
 - [x] ops: deploy the app to the internet.
@@ -67,7 +72,7 @@ It will show tasks that you can run with Nx.
 - [ ] feat: maybe more wallets. use ConnectKit, Rainbow or similar
 - [ ] feat: Support ENS. Display ENS instead of address, if any.
 - [ ] feat: asynchronous transaction status. Allow users to close the app and come later to check the status of their last transaction(s).
-- [ ] tech-debt: remove token hardcoded decimals and token name. get its metadata from chain.
+- [x] tech-debt: remove token hardcoded decimals and token name. get its metadata from chain.
 
 ### Things I struggled the most with
 

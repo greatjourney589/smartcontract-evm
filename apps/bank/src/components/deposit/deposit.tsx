@@ -8,7 +8,7 @@ import { useWallet } from '../../store/useWallet';
 import { DepositForm as Form } from './deposit-form';
 import { TransactionReceipt } from 'viem';
 import { useBankBalance } from '../../store/useBankBalance';
-import { useTokenQuery } from '../../store/useToken';
+import { useTokenUserData } from '../../store/useToken';
 
 type TransactionStatus =
   | {
@@ -30,7 +30,7 @@ type TransactionStatus =
 export function Deposit() {
   const { data, status } = useWallet();
   const { refetch: refetchBankBalance } = useBankBalance();
-  const { data: tokenData, refetch: refetchTokenData } = useTokenQuery();
+  const { data: tokenData, refetch: refetchTokenData } = useTokenUserData();
 
   const [txStatus, setTxStatus] = useState<TransactionStatus>({
     status: 'pending',

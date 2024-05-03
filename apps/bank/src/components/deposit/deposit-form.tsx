@@ -19,6 +19,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { TokenSymbol } from '../token-symbol';
 
 type Props = {
   onDeposit?: (amount: number) => Promise<void>;
@@ -96,7 +97,9 @@ export function DepositForm({
         </NumberInput>
       </FormControl>
       <HStack spacing={4} fontSize="sm">
-        <Text>Allowance: {allowance} TTK</Text>
+        <Text>
+          Allowance: {allowance} <TokenSymbol />
+        </Text>
         <Link
           href="https://sepolia.etherscan.io/address/0x9aF18838611950953823154a04a14d2A34eE615e#writeContract#F1"
           isExternal

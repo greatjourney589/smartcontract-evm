@@ -18,7 +18,9 @@ import {
 
 import { useWallet } from '../store/useWallet';
 import { useBankBalance } from '../store/useBankBalance';
+
 import { Deposit } from '../components/deposit/deposit';
+import { TokenSymbol } from '../components/token-symbol';
 
 export default function Index() {
   const { data: wallet } = useWallet();
@@ -34,7 +36,7 @@ export default function Index() {
             </Heading>
             <Heading as="div" size="lg">
               <span className="text-emerald-600">{balance.toString()}</span>{' '}
-              <span>TTK</span>
+              <TokenSymbol />
             </Heading>
           </HStack>
         </CardHeader>
