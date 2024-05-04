@@ -14,12 +14,14 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  VStack,
 } from '@chakra-ui/react';
 
 import { useWallet } from '../store/useWallet';
 import { useBankBalance } from '../store/useBankBalance';
 
 import { Deposit } from '../components/deposit/deposit';
+import { NetworkGuard } from '../components/network-guard';
 import { TokenSymbol } from '../components/token-symbol';
 
 export default function Index() {
@@ -27,8 +29,9 @@ export default function Index() {
   const { data: balance } = useBankBalance();
 
   return (
-    <div className="flex items-center justify-center">
-      <Card className="w-11/12 max-w-2xl mt-10" variant="elevated" size="md">
+    <VStack spacing={6}>
+      <NetworkGuard />
+      <Card className="w-full" variant="elevated" size="md">
         <CardHeader>
           <HStack as="h2" justifyContent="space-between">
             <Heading as="div" size="lg">
@@ -59,7 +62,7 @@ export default function Index() {
           )}
         </CardBody>
       </Card>
-    </div>
+    </VStack>
   );
 }
 

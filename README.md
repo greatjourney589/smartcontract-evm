@@ -68,8 +68,8 @@ It will show tasks that you can run with Nx.
 - [ ] feat: support withdrawal
 - [ ] feat: support token allowance increase from the app
 - [ ] feat: support token minting
-- [ ] tech-debt: handle network missmatch. request connecting to sepolia on wallet connection `wallet_switchEthereumChain`
-- [ ] feat: maybe more wallets. use ConnectKit, Rainbow or similar
+- [x] tech-debt: handle network missmatch. request connecting to sepolia on wallet connection `wallet_switchEthereumChain`
+- [ ] ~~feat: maybe more wallets. use ConnectKit, Rainbow or similar~~
 - [ ] feat: Support ENS. Display ENS instead of address, if any.
 - [ ] feat: asynchronous transaction status. Allow users to close the app and come later to check the status of their last transaction(s).
 - [x] tech-debt: remove token hardcoded decimals and token name. get its metadata from chain.

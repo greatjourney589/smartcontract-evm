@@ -13,7 +13,7 @@ export default function RootLayout({
       <body className="h-full">
         <Provider>
           <Nav appName="Bank3 App" />
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <div className="mx-auto px-4 py-6 sm:px-6 lg:px-8 w-11/12 max-w-2xl mt-10">
             {children}
           </div>
         </Provider>

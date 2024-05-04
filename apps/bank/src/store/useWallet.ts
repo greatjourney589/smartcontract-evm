@@ -4,9 +4,18 @@ import { sepolia } from 'viem/chains';
 
 declare global {
   interface Window {
-    ethereum?: { request(...args: any): Promise<any> };
+    ethereum?: {
+      request(...args: any): Promise<any>;
+      on(eventName: 'chainChanged', handler: (chainId: string) => void): void;
+      removeListener(
+        eventName: 'chainChanged',
+        handler: (chainId: string) => void
+      ): void;
+    };
   }
 }
+
+export const network = sepolia;
 
 export function useWallet() {
   return useQuery({
