@@ -1,8 +1,8 @@
-# evm-smart-contract-example
+# smartcontract-evm
 
-<p align="center"><img src="https://raw.githubusercontent.com/jonalvarezz/evm-smart-contract-example/main/assets/screenshot.png?token=GHSAT0AAAAAABUAWENUMNSMA6WBPA7YTTW2ZRP4BYQ" width="500"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/greatjourney589/smartcontract-evm/main/assets/screenshot.png?token=GHSAT0AAAAAABUAWENUMNSMA6WBPA7YTTW2ZRP4BYQ" width="500"></p>
 
-Watch a demo video here: https://github.com/jonalvarezz/evm-smart-contract-example/tree/main/assets/demo.mp4
+Watch a demo video here: https://github.com/greatjourney589/smartcontract-evm/tree/main/assets/demo.mp4
 
 This is a web application to interact with the two following smart contracts on the Sepolia (ETH) network:
 
@@ -13,12 +13,13 @@ The app allows users to deposit and withdraw BankToken(TTK) tokens to and from t
 
 ## 🚀 Quick start
 
+
 1. Clone the repository
 
    ```
-   git clone https://github.com/jonalvarezz/evm-smart-contract-example.git
+   git clone https://github.com/greatjourney589/smartcontract-evm.git
 
-   cd evm-smart-contract-example
+   cd smartcontract-evm
    ```
 
 2. Install dependencies with PNPM
